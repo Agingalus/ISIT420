@@ -1,9 +1,8 @@
 
-function ToDo(pTitle, pDetail, pPriority) {
+function Movie(pTitle, pGenre, pReleaseYear) {
     this.title= pTitle;
-    this.detail = pDetail;
-    this.priority = pPriority;
-    this.completed = false;
+    this.genre = pGenre;
+    this.releaseYear = pReleaseYear;
   }
   var ClientNotes = [];  // our local copy of the cloud data
 
@@ -12,18 +11,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     document.getElementById("submit").addEventListener("click", function () {
         var tTitle = document.getElementById("title").value;
-        var tDetail = document.getElementById("detail").value;
-        var tPriority = document.getElementById("priority").value;
-        var oneToDo = new ToDo(tTitle, tDetail, tPriority);
+        var tGenre = document.getElementById("genre").value;
+        var tReleaseYear = document.getElementById("releaseYear").value;
+        var oneMovie = new Movie(tTitle, tGenre, tReleaseYear);
 
         $.ajax({
-            url: '/NewToDo' ,
+            url: '/NewMovie' ,
             method: 'POST',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(oneToDo),
+            data: JSON.stringify(oneMovie),
             success: function (result) {
-                console.log("added new note")
+                console.log("added new movie")
             }
 
         });
@@ -37,10 +36,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     document.getElementById("delete").addEventListener("click", function () {
         
-        var whichToDo = document.getElementById('deleteTitle').value;
+        var whichMovie = document.getElementById('deleteTitle').value;
         var idToDelete = "";
         for(i=0; i< ClientNotes.length; i++){
-            if(ClientNotes[i].title === whichToDo) {
+            if(ClientNotes[i].title === whichMovie) {
                 idToDelete = ClientNotes[i]._id;
            }
         }
@@ -48,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if(idToDelete != "")
         {
                      $.ajax({  
-                    url: 'DeleteToDo/'+ idToDelete,
+                    url: 'DeleteMovie/'+ idToDelete,
                     type: 'DELETE',  
                     contentType: 'application/json',  
                     success: function (response) {  
@@ -68,16 +67,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     document.getElementById("msubmit").addEventListener("click", function () {
         var tTitle = document.getElementById("mtitle").value;
-        var tDetail = document.getElementById("mdetail").value;
-        var tPriority = document.getElementById("mpriority").value;
-        var oneToDo = new ToDo(tTitle, tDetail, tPriority);
-        oneToDo.completed =  document.getElementById("mcompleted").value;
+        var tGenre = document.getElementById("mgenre").value;
+        var tReleaseYear = document.getElementById("mreleaseYear").value;
+        var oneMovie = new Movie(tTitle, tGenre, tReleaseYear);
+        oneMovie.completed =  document.getElementById("mcompleted").value;
         
             $.ajax({
-                url: 'UpdateToDo/'+idToFind,
+                url: 'UpdateMovie/'+idToFind,
                 type: 'PUT',
                 contentType: 'application/json',
-                data: JSON.stringify(oneToDo),
+                data: JSON.stringify(oneMovie),
                     success: function (response) {  
                         console.log(response);  
                     },  
@@ -103,12 +102,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
         console.log(idToFind);
  
-        $.get("/FindToDo/"+ idToFind, function(data, status){ 
+        $.get("/FindMovie/"+ idToFind, function(data, status){ 
             console.log(data[0].title);
             document.getElementById("mtitle").value = data[0].title;
-            document.getElementById("mdetail").value= data[0].detail;
-            document.getElementById("mpriority").value = data[0].priority;
-            document.getElementById("mcompleted").value = data[0].completed;
+            document.getElementById("mgenre").value= data[0].detail;
+            document.getElementById("mreleaseYear").value = data[0].priority;;
            
 
         });
@@ -126,29 +124,26 @@ ul.innerHTML = "";  // clears existing list so we don't duplicate old ones
 
 //var ul = document.createElement('ul')
 
-$.get("/ToDos", function(data, status){  // AJAX get
+$.get("/Movies", function(data, status){  // AJAX get
     ClientNotes = data;  // put the returned server json data into our local array
 
     // sort array by one property
     ClientNotes.sort(compare);  // see compare method below
     console.log(data);
     //listDiv.appendChild(ul);
-    ClientNotes.forEach(ProcessOneToDo); // build one li for each item in array
-    function ProcessOneToDo(item, index) {
+    ClientNotes.forEach(ProcessOneMovie); // build one li for each item in array
+    function ProcessOneMovie(item, index) {
         var li = document.createElement('li');
         ul.appendChild(li);
 
-        li.innerHTML=li.innerHTML + index + ": " + " Priority: " + item.priority + "  " + item.title + ":  " + item.detail + " Done? "+ item.completed;
+        li.innerHTML=li.innerHTML + index + ": " + " Title: " + item.title + "  " + item.genre + ":  " + item.releaseYear;
     }
 });
 }
 
 function compare(a,b) {
-    if (a.completed == false && b.completed== true) {
+    if (a.title > b.title) {
         return -1;
     }
-    if (a.completed == false && b.completed== true) {
-        return 1;
-    }
-    return 0;
+    return 1;
 }

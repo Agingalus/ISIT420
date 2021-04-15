@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 // schema will enforce consistency in all our documents (records)
 const Schema = mongoose.Schema;
 
-const ToDoSchema = new Schema({
+const movieSchema = new Schema({
   title: {
     type: String,
     required: true
@@ -16,10 +16,10 @@ const ToDoSchema = new Schema({
     type: String,
     required: true
   },
-  releaseDate: {
+  releaseYear: {
     type: Number,
     required: true
   }
 });
 
-module.exports = mongoose.model("ToDos", ToDoSchema);
+module.exports = mongoose.model("Movies", movieSchema);

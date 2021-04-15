@@ -5,7 +5,7 @@ var router = express.Router();
 // .ADO.Net is a wrapper over raw SQL server interface
 const mongoose = require("mongoose");
 
-const ToDos = require("../ToDos");
+const Movies = require("../Movies");
 
 // edited to include my non-admin, user level account and PW on mongo atlas
 // and also to include the name of the mongo DB that the collection
@@ -14,7 +14,7 @@ const dbURI =
 
 // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
 // by default, you need to set it to false.
-mongoose.set('useFindAndModify', true);
+mongoose.set('useFindAndModify', false);
 
 const options = {
   reconnectTries: Number.MAX_VALUE,
@@ -37,71 +37,71 @@ router.get('/', function(req, res) {
   res.sendFile('index.html');
 });
 
-/* GET all ToDos */
-router.get('/ToDos', function(req, res) {
+/* GET all movies */
+router.get('/Movies', function(req, res) {
   // find {  takes values, but leaving it blank gets all}
-  ToDos.find({}, (err, AllToDos) => {
+  Movies.find({}, (err, AllMovies) => {
     if (err) {
       console.log(err);
       res.status(500).send(err);
     }
-    res.status(200).json(AllToDos);
+    res.status(200).json(AllMovies);
   });
 });
 
 
 
 
-/* post a new ToDo and push to Mongo */
-router.post('/NewToDo', function(req, res) {
+/* post a new movie and push to Mongo */
+router.post('/NewMovie', function(req, res) {
 
-    let oneNewToDo = new ToDos(req.body);  // call constuctor in ToDos code that makes a new mongo ToDo object
+    let oneNewMovie = new Movies(req.body);  // call constuctor in movies code that makes a new mongo movie object
     console.log(req.body);
-    oneNewToDo.save((err, todo) => {
+    oneNewMovie.save((err, movies) => {
       if (err) {
         res.status(500).send(err);
       }
       else {
-      console.log(todo);
-      res.status(201).json(todo);
+      console.log(movie);
+      res.status(201).json(movie);
       }
     });
 });
 
 
-router.delete('/DeleteToDo/:id', function (req, res) {
-  ToDos.deleteOne({ _id: req.params.id }, (err, note) => { 
+router.delete('/DeleteMovie/:id', function (req, res) {
+  Movies.deleteOne({ _id: req.params.id }, (err, note) => { 
     if (err) {
       res.status(404).send(err);
     }
-    res.status(200).json({ message: "ToDo successfully deleted" });
+    res.status(200).json({ message: "Movie successfully deleted" });
   });
 });
 
 
-router.put('/UpdateToDo/:id', function (req, res) {
-  ToDos.findOneAndUpdate(
+router.put('/UpdateMovie/:id', function (req, res) {
+  Movies.findOneAndUpdate(
     { _id: req.params.id },
-    { title: req.body.title, detail: req.body.detail, priority: req.body.priority,   completed: req.body.completed },
+    { title: req.body.title, genre: req.body.genre, releaseYear: req.body.releaseYear },
    { new: true },
-    (err, todo) => {
+    (err, movie) => {
       if (err) {
         res.status(500).send(err);
     }
-    res.status(200).json(todo);
+    res.status(200).json(movie);
     })
   });
 
 
-  /* GET one ToDos */
-router.get('/FindToDo/:id', function(req, res) {
+  /* GET one movies */
+router.get('/Findmovie/:id', function(req, res) {
   console.log(req.params.id );
-  ToDos.find({ _id: req.params.id }, (err, oneToDo) => {
+  movies.find({ _id: req.params.id }, (err, onemovie) => {
     if (err) {
       console.log(err);
       res.status(500).send(err);
     }
-    res.status(200).json(oneToDo);
+    res.status(200).json(onemovie);
   });
 });
 
