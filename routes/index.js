@@ -97,7 +97,7 @@ router.put('/UpdateMovie/:id', function (req, res) {
   /* GET one movies */
 router.get('/Findmovie/:id', function(req, res) {
   console.log(req.params.id );
-  movies.find({ _id: req.params.id }, (err, onemovie) => {
+  Movies.find({ _id: req.params.id }, (err, onemovie) => {
     if (err) {
       console.log(err);
       res.status(500).send(err);

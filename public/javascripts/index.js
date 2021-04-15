@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var tTitle = document.getElementById("addtitle").value;
         var tGenre = document.getElementById("addgenre").value;
         var tReleaseYear = document.getElementById("addreleaseYear").value;
-        var oneMovie = new Movie(tTitle, tGenre, tReleaseYear);
+        var oneMovie = new Movie(tTitle, tGenre, parseInt(tReleaseYear));
 
         $.ajax({
             url: '/NewMovie' ,
@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             data: JSON.stringify(oneMovie),
             success: function (result) {
                 console.log("added new movie")
+                updateList();
             }
 
         });
@@ -51,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     type: 'DELETE',  
                     contentType: 'application/json',  
                     success: function (response) {  
-                        console.log(response);  
+                        console.log(response); 
+                        updateList(); 
                     },  
                     error: function () {  
                         console.log('Error in Operation');  
@@ -69,8 +71,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var tTitle = document.getElementById("mtitle").value;
         var tGenre = document.getElementById("mgenre").value;
         var tReleaseYear = document.getElementById("mreleaseYear").value;
-        var oneMovie = new Movie(tTitle, tGenre, tReleaseYear);
-        oneMovie.completed =  document.getElementById("mcompleted").value;
+        var oneMovie = new Movie(tTitle, tGenre, parseInt(tReleaseYear));
+       
         
             $.ajax({
                 url: 'UpdateMovie/'+idToFind,
@@ -78,7 +80,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 contentType: 'application/json',
                 data: JSON.stringify(oneMovie),
                     success: function (response) {  
-                        console.log(response);  
+                        console.log(response);
+                        updateList();  
                     },  
                     error: function () {  
                         console.log('Error in Operation');  
@@ -105,8 +108,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         $.get("/FindMovie/"+ idToFind, function(data, status){ 
             console.log(data[0].title);
             document.getElementById("mtitle").value = data[0].title;
-            document.getElementById("mgenre").value= data[0].detail;
-            document.getElementById("mreleaseYear").value = data[0].priority;;
+            document.getElementById("mgenre").value= data[0].genre;
+            document.getElementById("mreleaseYear").value = data[0].releaseYear;
            
 
         });
@@ -136,7 +139,7 @@ $.get("/Movies", function(data, status){  // AJAX get
         var li = document.createElement('li');
         ul.appendChild(li);
 
-        li.innerHTML=li.innerHTML + index + ": " + " Title: " + item.title + "  " + item.genre + ":  " + item.releaseYear;
+        li.innerHTML=li.innerHTML + (index + 1) + ": " + " Title: " + item.title + ", Genre: " + item.genre + ", Release Year: " + item.releaseYear;
     }
 });
 }
