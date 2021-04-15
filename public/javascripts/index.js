@@ -10,9 +10,9 @@ function Movie(pTitle, pGenre, pReleaseYear) {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     document.getElementById("submit").addEventListener("click", function () {
-        var tTitle = document.getElementById("title").value;
-        var tGenre = document.getElementById("genre").value;
-        var tReleaseYear = document.getElementById("releaseYear").value;
+        var tTitle = document.getElementById("addtitle").value;
+        var tGenre = document.getElementById("addgenre").value;
+        var tReleaseYear = document.getElementById("addreleaseYear").value;
         var oneMovie = new Movie(tTitle, tGenre, tReleaseYear);
 
         $.ajax({

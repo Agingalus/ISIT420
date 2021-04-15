@@ -57,6 +57,7 @@ router.post('/NewMovie', function(req, res) {
 
     let oneNewMovie = new Movies(req.body);  // call constuctor in movies code that makes a new mongo movie object
     console.log(req.body);
+    console.log("failing here");
     oneNewMovie.save((err, movies) => {
       if (err) {
         res.status(500).send(err);
