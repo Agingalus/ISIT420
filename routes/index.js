@@ -10,11 +10,11 @@ const Movies = require("../Movies");
 // edited to include my non-admin, user level account and PW on mongo atlas
 // and also to include the name of the mongo DB that the collection
 const dbURI = 
-"mongodb+srv://BCStudent:BCStudent@cluster0.gdypt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+"mongodb+srv://BCStudent:BCStudent@cluster0.gdypt.mongodb.net/MovieDB?retryWrites=true&w=majority";
 
 // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
 // by default, you need to set it to false.
-mongoose.set('useFindAndModify', false);
+mongoose.set('useFindAndModify', true);
 
 const options = {
   reconnectTries: Number.MAX_VALUE,
@@ -63,8 +63,8 @@ router.post('/NewMovie', function(req, res) {
         res.status(500).send(err);
       }
       else {
-      console.log(movie);
-      res.status(201).json(movie);
+      console.log(movies);
+      res.status(201).json(movies);
       }
     });
 });
