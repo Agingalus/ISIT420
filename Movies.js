@@ -12,7 +12,7 @@ const movieSchema = new Schema({
     type: String,
     required: true
   },
-  genere: {
+  genre: {
     type: String,
     required: true
   },
