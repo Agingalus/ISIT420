@@ -4,6 +4,8 @@ function RecordOfSales(pStoreID, pSalesPersonID, pCdID, pPricePaid) {
     this.SalesPersonID = pSalesPersonID;
     this.CdID = pCdID;
     this.PricePaid = pPricePaid;
+    this.HourPurch = Math.floor(Math.random() * 24 );
+    this.DayPurch = Math.floor(Math.random() * 365) + 1;
 }
 var ClientNotes = [];  // our local copy of the cloud data
 
@@ -37,6 +39,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("CreateEntry").addEventListener("click", function () {
         createNewEntry()
     });
+    document.getElementById("submit2").addEventListener("click", function () {
+        for(let i = 0; i < 500; i++){
+            createNewEntry();
+            document.getElementById("submit").click();
+
+        }
+
+    document.getElementById("addStoreID").value = null;
+    document.getElementById("addSalesPersonID").value = null;
+    document.getElementById("addCdID").value = null;
+    document.getElementById("addPricePaid").value = null;
+
+    });
 
     CreateEntry
 
@@ -67,3 +82,4 @@ function createNewEntry() {
     document.getElementById("addPricePaid").value = randomNumeberforPricePaid;
 
 }
+

@@ -55,7 +55,6 @@ router.get('/RecordOfSales', function (req, res) {
 /* post a new recordOfSales and push to Mongo */
 router.post('/NewRecordOfSales', function (req, res) {
 
-  console.log("in the post functions")
   let oneNewrecordOfSales = new RecordOfSales(req.body);  // call constuctor in recordOfSales code that makes a new mongo recordOfSales object
   console.log(req.body);
   oneNewrecordOfSales.save((err, recordOfSales) => {
