@@ -5,12 +5,12 @@ var router = express.Router();
 // .ADO.Net is a wrapper over raw SQL server interface
 const mongoose = require("mongoose");
 
-const Movies = require("../Movies");
+const RecordOfSale = require("../RecordOfSale");
 
 // edited to include my non-admin, user level account and PW on mongo atlas
 // and also to include the name of the mongo DB that the collection
-const dbURI = 
-"mongodb+srv://BCStudent:BCStudent@cluster0.gdypt.mongodb.net/movieDB?retryWrites=true&w=majority";
+const dbURI =
+  "mongodb+srv://BCStudent:BCStudent@cluster0.gdypt.mongodb.net/recordsOfSales?retryWrites=true&w=majority";
 
 // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
 // by default, you need to set it to false.
@@ -33,76 +33,75 @@ mongoose.connect(dbURI, options).then(
 
 
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
   res.sendFile('index.html');
 });
 
-/* GET all movies */
-router.get('/Movies', function(req, res) {
+/* GET all recordOfSales */
+router.get('/RecordOfSales', function (req, res) {
   // find {  takes values, but leaving it blank gets all}
-  Movies.find({}, (err, AllMovies) => {
+  RecordOfSales.find({}, (err, AllRecordOfSales) => {
     if (err) {
       console.log(err);
       res.status(500).send(err);
     }
-    res.status(200).json(AllMovies);
+    res.status(200).json(AllRecordOfSales);
   });
 });
 
 
 
 
-/* post a new movie and push to Mongo */
-router.post('/NewMovie', function(req, res) {
+/* post a new recordOfSales and push to Mongo */
+router.post('/NewRecordOfSales', function (req, res) {
 
-    let oneNewMovie = new Movies(req.body);  // call constuctor in movies code that makes a new mongo movie object
-    console.log(req.body);
-    console.log("failing here");
-    oneNewMovie.save((err, movies) => {
-      if (err) {
-        res.status(500).send(err);
-      }
-      else {
-      console.log(movies);
-      res.status(201).json(movies);
-      }
-    });
+  let oneNewrecordOfSales = new RecordOfSales(req.body);  // call constuctor in recordOfSales code that makes a new mongo recordOfSales object
+  console.log(req.body);
+  oneNewrecordOfSales.save((err, recordOfSales) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    else {
+      console.log(recordOfSales);
+      res.status(201).json(recordOfSales);
+    }
+  });
 });
 
 
-router.delete('/DeleteMovie/:id', function (req, res) {
-  Movies.deleteOne({ _id: req.params.id }, (err, note) => { 
+router.delete('/DeleteRecordOfSales/:id', function (req, res) {
+  RecordOfSales.deleteOne({ _id: req.params.id }, (err, note) => {
     if (err) {
       res.status(404).send(err);
     }
-    res.status(200).json({ message: "Movie successfully deleted" });
+    res.status(200).json({ message: "recordOfSales successfully deleted" });
   });
 });
 
 
-router.put('/UpdateMovie/:id', function (req, res) {
-  Movies.findOneAndUpdate(
+router.put('/UpdateRecordOfSales/:id', function (req, res) {
+  RecordOfSales.findOneAndUpdate(
     { _id: req.params.id },
     { title: req.body.title, genre: req.body.genre, releaseYear: req.body.releaseYear },
-   { new: true },
-    (err, movie) => {
+    { new: true },
+    (err, recordOfSales) => {
       if (err) {
         res.status(500).send(err);
-    }
-    res.status(200).json(movie);
+      }
+      res.status(200).json(recordOfSales);
     })
-  });
+});
 
 
-  /* GET one movies */
-router.get('/Findmovie/:id', function(req, res) {
-  console.log(req.params.id );
-  Movies.find({ _id: req.params.id }, (err, onemovie) => {
+/* GET one recordOfSales */
+router.get('/FindRecordOfSales/:id', function (req, res) {
+  console.log(req.params.id);
+  RecordOfSales.find({ _id: req.params.id }, (err, oneRecordOfSales) => {
     if (err) {
       console.log(err);
       res.status(500).send(err);
     }
-    res.status(200).json(onemovie);
+    res.status(200).json(oneRecordOfSales);
   });
 });
 

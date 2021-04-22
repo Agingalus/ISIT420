@@ -7,19 +7,23 @@ const mongoose = require("mongoose");
 // schema will enforce consistency in all our documents (records)
 const Schema = mongoose.Schema;
 
-const movieSchema = new Schema({
-  title: {
-    type: String,
+const RecordOfSaleSchema = new Schema({
+  StoreID: {
+    type: Number,
     required: true
   },
-  genre: {
-    type: String,
+  SalesPersonID: {
+    type: Number,
     required: true
   },
-  releaseYear: {
+  CdID: {
+    type: Number,
+    required: true
+  },
+  PricePaidID: {
     type: Number,
     required: true
   }
 });
 
-module.exports = mongoose.model("Movies", movieSchema);
+module.exports = mongoose.model("RecordOfSales", RecordOfSaleSchema);
