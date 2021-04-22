@@ -7,7 +7,7 @@ function RecordOfSales(pStoreID, pSalesPersonID, pCdID, pPricePaid) {
     this.HourPurch = Math.floor(Math.random() * 24);
     this.DayPurch = Math.floor(Math.random() * 365) + 1;
 }
-var ClientNotes = [];  // our local copy of the cloud data
+
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
