@@ -5,7 +5,7 @@ var router = express.Router();
 // .ADO.Net is a wrapper over raw SQL server interface
 const mongoose = require("mongoose");
 
-const RecordOfSale = require("../RecordOfSale");
+const RecordOfSales = require("../RecordOfSale");
 
 // edited to include my non-admin, user level account and PW on mongo atlas
 // and also to include the name of the mongo DB that the collection
@@ -55,6 +55,7 @@ router.get('/RecordOfSales', function (req, res) {
 /* post a new recordOfSales and push to Mongo */
 router.post('/NewRecordOfSales', function (req, res) {
 
+  console.log("in the post functions")
   let oneNewrecordOfSales = new RecordOfSales(req.body);  // call constuctor in recordOfSales code that makes a new mongo recordOfSales object
   console.log(req.body);
   oneNewrecordOfSales.save((err, recordOfSales) => {
@@ -68,41 +69,5 @@ router.post('/NewRecordOfSales', function (req, res) {
   });
 });
 
-
-router.delete('/DeleteRecordOfSales/:id', function (req, res) {
-  RecordOfSales.deleteOne({ _id: req.params.id }, (err, note) => {
-    if (err) {
-      res.status(404).send(err);
-    }
-    res.status(200).json({ message: "recordOfSales successfully deleted" });
-  });
-});
-
-
-router.put('/UpdateRecordOfSales/:id', function (req, res) {
-  RecordOfSales.findOneAndUpdate(
-    { _id: req.params.id },
-    { title: req.body.title, genre: req.body.genre, releaseYear: req.body.releaseYear },
-    { new: true },
-    (err, recordOfSales) => {
-      if (err) {
-        res.status(500).send(err);
-      }
-      res.status(200).json(recordOfSales);
-    })
-});
-
-
-/* GET one recordOfSales */
-router.get('/FindRecordOfSales/:id', function (req, res) {
-  console.log(req.params.id);
-  RecordOfSales.find({ _id: req.params.id }, (err, oneRecordOfSales) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send(err);
-    }
-    res.status(200).json(oneRecordOfSales);
-  });
-});
 
 module.exports = router;
