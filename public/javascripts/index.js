@@ -4,8 +4,9 @@ function RecordOfSales(pStoreID, pSalesPersonID, pCdID, pPricePaid) {
     this.SalesPersonID = pSalesPersonID;
     this.CdID = pCdID;
     this.PricePaid = pPricePaid;
-    this.HourPurch = Math.floor(Math.random() * 24);
-    this.DayPurch = Math.floor(Math.random() * 365) + 1;
+    this.HourPurch = 0;
+    this.DayPurch = 0;
+
 }
 
 
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var tSalesPersonID = document.getElementById("addSalesPersonID").value;
         var tCdID = document.getElementById("addCdID").value;
         var tPricePaid = document.getElementById("addPricePaid").value;
-        var oneRecordOfSales = new RecordOfSales(parseInt(tStoreID), parseInt(tSalesPersonID), parseInt(tCdID), parseInt(tPricePaid));
+        var oneRecordOfSales = new RecordOfSales(parseInt(tStoreID), parseInt(tSalesPersonID), parseInt(tCdID), parseInt(tPricePaid,));
 
         $.ajax({
             url: '/NewRecordOfSales',

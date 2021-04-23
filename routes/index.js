@@ -55,8 +55,12 @@ router.get('/RecordOfSales', function (req, res) {
 /* post a new recordOfSales and push to Mongo */
 router.post('/NewRecordOfSales', function (req, res) {
 
+
   let oneNewrecordOfSales = new RecordOfSales(req.body);  // call constuctor in recordOfSales code that makes a new mongo recordOfSales object
   console.log(req.body);
+  // we decided to randomely do it rather then increment it
+  oneNewrecordOfSales.HourPurch = Math.floor(Math.random() * 24);
+  oneNewrecordOfSales.DayPurch = Math.floor(Math.random() * 365) + 1;
   oneNewrecordOfSales.save((err, recordOfSales) => {
     if (err) {
       res.status(500).send(err);
