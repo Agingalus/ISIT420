@@ -13,18 +13,19 @@ namespace Order500HW3
 {
     public partial class Form1 : Form
     {
+        NodeOrders500Entities nodeOrders500 = new NodeOrders500Entities();
         public Form1()
         {
             InitializeComponent();
         }
         private void Form1_load(object sender, EventArgs e)
         {
-            NodeOrders500Entities nodeOrders500 = new NodeOrders500Entities();
-            employeeList.Items.Add("hi");
-            employeeList.Items.Add("buy");
-
+            
+            var allEmployees = (from orders in nodeOrders500.SalesPersonTables
+                               orderby orders.LastName
+                               select  orders.LastName).ToList();
+            employeeList.DataSource = allEmployees;
         }
-
 
 
         private void employeeButton_Click(object sender, EventArgs e)
@@ -39,8 +40,6 @@ namespace Order500HW3
 
         private void employeeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            employeeList.Items.Add(2);
-            employeeList.Items.Add(1);
 
 
         }
