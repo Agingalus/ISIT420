@@ -16,7 +16,7 @@ namespace Order500HW3
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new markUp());
+            Application.Run(new Form1());
         }
     }
 }
