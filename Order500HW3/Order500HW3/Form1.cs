@@ -42,17 +42,9 @@ namespace Order500HW3
 
         }
 
-        private void employeeList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void storeList_SelectedIndexChanged(object sender, EventArgs e)
+        private void markUps_Click(object sender, EventArgs e)
         {
 
         }
-
- 
     }
 }
