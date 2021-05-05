@@ -13,3 +13,18 @@ D:\Current Classes\ISIT 420\AspProject\Order500HW3\Order500HW3\bin\Debug\EntityF
 D:\Current Classes\ISIT 420\AspProject\Order500HW3\Order500HW3\bin\Debug\EntityFramework.xml
 D:\Current Classes\ISIT 420\AspProject\Order500HW3\Order500HW3\bin\Debug\EntityFramework.SqlServer.xml
 D:\Current Classes\ISIT 420\AspProject\Order500HW3\Order500HW3\obj\Debug\Order500HW3.csproj.CopyComplete
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\bin\Debug\Order500HW3.exe.config
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\bin\Debug\Order500HW3.exe
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\bin\Debug\Order500HW3.pdb
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\bin\Debug\EntityFramework.dll
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\bin\Debug\EntityFramework.xml
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\obj\Debug\Order500HW3.csprojAssemblyReference.cache
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\obj\Debug\Order500HW3.Form1.resources
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\obj\Debug\Order500HW3.Properties.Resources.resources
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\obj\Debug\Order500HW3.csproj.GenerateResource.cache
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\obj\Debug\Order500HW3.csproj.CoreCompileInputs.cache
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\obj\Debug\Order500HW3.csproj.CopyComplete
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\obj\Debug\Order500HW3.exe
+C:\Users\codlo\Documents\GitHub\ISIT420\Order500HW3\Order500HW3\obj\Debug\Order500HW3.pdb

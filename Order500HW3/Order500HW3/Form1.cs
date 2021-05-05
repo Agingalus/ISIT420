@@ -20,11 +20,15 @@ namespace Order500HW3
         }
         private void Form1_load(object sender, EventArgs e)
         {
-            
             var allEmployees = (from orders in nodeOrders500.SalesPersonTables
                                orderby orders.LastName
                                select  orders.LastName).ToList();
             employeeList.DataSource = allEmployees;
+
+            var allStores = (from stores in nodeOrders500.StoreTables
+                             orderby stores.storeID
+                             select stores.City).ToList();
+            storeList.DataSource = allStores;
         }
 
 
