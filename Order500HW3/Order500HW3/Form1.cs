@@ -14,6 +14,7 @@ namespace Order500HW3
     public partial class Form1 : Form
     {
         NodeOrders500Entities nodeOrders500 = new NodeOrders500Entities();
+
         public Form1()
         {
             InitializeComponent();
@@ -44,7 +45,45 @@ namespace Order500HW3
 
         private void markUps_Click(object sender, EventArgs e)
         {
+            var getMarkup = (from orders in nodeOrders500.Orders 
+                             join sales in nodeOrders500.StoreTables 
+                             on orders.storeID equals sales.storeID    
+                             where orders.pricePaid > 13
+                             group sales by sales.City  into thingy
+                             select thingy.Key).ToList();
+            var getMarkup1 = (from orders in nodeOrders500.Orders
+                             join sales in nodeOrders500.StoreTables
+                             on orders.storeID equals sales.storeID
+                             where orders.pricePaid > 13
+                             group sales by sales.City into thingy
+                             select  thingy.Key).ToList();
+            //var listIt = nodeOrders500.Orders.SqlQuery("select stores.City, COUNT(*) from Orders as orders join StoreTable as stores on orders.storeID = stores.storeID where orders.pricePaid > 13group by stores.City").ToList();
+            /*var otherMarkup = (from orders in nodeOrders500.Orders
+                               group orders by orders.cdID into group1
+                               where group1.Key > 13
+
+                               select group1);*/
+            using(var context = new NodeOrders500Entities())
+            {
+                var listIt1 = context.Database.SqlQuery<int>("select  COUNT(*) from Orders as orders join StoreTable as stores on orders.storeID = stores.storeID where orders.pricePaid > 13group by stores.City").ToList();
+                foreach (int item in listIt1)
+                {
+                    listView1.Items.Add(item.ToString());
+                }
+                var listIt2 = context.Database.SqlQuery<string>("select  stores.City from Orders as orders join StoreTable as stores on orders.storeID = stores.storeID where orders.pricePaid > 13group by stores.City").ToList();
+                foreach (string item in listIt2)
+                {
+                    listView2.Items.Add(item);
+                }
+            }
+
+            //foreach (object item in listIt)
+            //{
+                //listView1.Items.Add((string)item);
+            //}
+            listView1.Show();
 
         }
+
     }
 }
