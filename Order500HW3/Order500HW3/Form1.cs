@@ -44,6 +44,7 @@ namespace Order500HW3
         }
 
         private void markUps_Click(object sender, EventArgs e)
+
         {
             var getMarkup = (from orders in nodeOrders500.Orders 
                              join sales in nodeOrders500.StoreTables 
@@ -63,26 +64,21 @@ namespace Order500HW3
                                where group1.Key > 13
 
                                select group1);*/
-            using(var context = new NodeOrders500Entities())
+            string allText = "";
+            using (var context = new NodeOrders500Entities())
             {
                 var listIt1 = context.Database.SqlQuery<int>("select  COUNT(*) from Orders as orders join StoreTable as stores on orders.storeID = stores.storeID where orders.pricePaid > 13group by stores.City").ToList();
-                foreach (int item in listIt1)
-                {
-                    listView1.Items.Add(item.ToString());
-                }
+
                 var listIt2 = context.Database.SqlQuery<string>("select  stores.City from Orders as orders join StoreTable as stores on orders.storeID = stores.storeID where orders.pricePaid > 13group by stores.City").ToList();
-                foreach (string item in listIt2)
+
+                
+                for (int i = 0; i < listIt1.Count();  i++)
                 {
-                    listView2.Items.Add(item);
-                }
+                    allText = listIt2[i] + " " + listIt1[i] ;
+                    listView1.Items.Add(allText);
+          
+                }                          
             }
-
-            //foreach (object item in listIt)
-            //{
-                //listView1.Items.Add((string)item);
-            //}
-            listView1.Show();
-
         }
 
     }
