@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>3 Queries  Homework</title>
+</head>
+<body>
+    <div id="1">
+        <br />
+        <p>Which stores are selling CDs for better markups?(price more than $13)</p>
+        <p>Here are the total number of sales per store of CD's sold at more than $13</p>
+        <input type="button" value="get MarkUps" onclick="getMarkUps();" />
+        <ul id="sales" class="list-group"></ul>
+        <br />
+        <br />
+    </div>
+    
+    <div id="2">
+        <p>I want to check on the performance of an employee.</p>
+        <p>Will show the total amount sold for a salesperson for the entire year</p>
+        <label for="employees">Choose an employee</label>
+        <select name="employees" id="employees">
+        <!--need to figure out how to populate this again-->
+        </select>
+        <input type="button" value="GetEmployee" onclick="getSpecificEmployee()" />
+        <p id="employeeResult"></p>
+        <br />
+        <br />
+    </div>
+
+    <div id="3">
+        <p>I want to see the performance of my stores</p>
+        <label for="stores" id="store">Choose a store</label>
+        <select name="stores" id="stores">
+            <!--need to figure out how to populate this again-->
+        </select>
+        <input type="button" value="GetCity" onclick="getTotalSalesForStore();" />
+        <p id="storeResult"></p>
+    </div>
+</body>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script src="Scripts/main.js"></script>
+</html>
