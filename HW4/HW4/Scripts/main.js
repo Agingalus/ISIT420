@@ -45,9 +45,11 @@ function getMarkUps() {
         .done(function (data) {
             console.log(data);
             $('#sales').empty();
+          
             $.each(data, function (key, item) {
                 // Add a list item for the product.
-                $('<li>', { text: item }).appendTo($('#sales'))
+                $('<li>', { text: `${item.key}: ${item.count}` }).appendTo($('#sales'))
+
             })
         })
 }
